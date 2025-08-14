@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Premium Luxury Vehicles{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <h2>EXCEPTIONAL AUTOMOBILES FOR THE DISCERNING DRIVER</h2>
+            <p>Discover our curated collection of the world's finest luxury vehicles, each meticulously selected for performance, craftsmanship, and prestige.</p>
+            <a href="{{ url_for('cars') }}" class="btn">Explore Our Collection</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <h3>Certified Pre-Owned</h3>
+            <p>Every vehicle undergoes a rigorous 200-point inspection and comes with a comprehensive warranty.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <h3>Flexible Financing</h3>
+            <p>Tailored financing solutions to meet your needs with competitive rates and personalized service.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Premium Protection</h3>
+            <p>Extended warranties and protection plans to safeguard your investment for years to come.</p>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <h3>Ready to experience automotive excellence?</h3>
+        <a href="{{ url_for('cars') }}" class="btn btn-large">Browse Our Inventory</a>
+    </section>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Car Inventory{% endblock %}
+
+{% block content %}
+    <h2>Car Inventory</h2>
+    
+    <div class="filters">
+        <form method="get" action="{{ url_for('cars') }}">
+            <label for="make">Make:</label>
+            <select name="make" id="make">
+                <option value="">All Makes</option>
+                {% for make in makes %}
+                    <option value="{{ make }}" {% if request.args.get('make') == make %}selected{% endif %}>{{ make }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="min_price">Min Price:</label>
+            <input type="number" name="min_price" id="min_price" 
+                   value="{{ request.args.get('min_price', '') }}" placeholder="Min">
+            
+            <label for="max_price">Max Price:</label>
+            <input type="number" name="max_price" id="max_price" 
+                   value="{{ request.args.get('max_price', '') }}" placeholder="Max">
+            
+            <button type="submit" class="btn">Filter</button>
+            <a href="{{ url_for('cars') }}" class="btn">Reset</a>
+        </form>
+    </div>
+    
+    <div class="car-grid">
+        {% for car in cars %}
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="{{ url_for('static', filename='images/' + car['image']) }}" alt="{{ car['make'] }} {{ car['model'] }}">
+                </div>
+                <div class="car-details">
+                    <h3>{{ car['make'] }} {{ car['model'] }} ({{ car['year'] }})</h3>
+                    <p><strong>Price:</strong> ${{ "{:,.2f}".format(car['price']) }}</p>
+                    <p><strong>Mileage:</strong> {{ "{:,}".format(car['mileage']) }} miles</p>
+                    <p><strong>Color:</strong> {{ car['color'] }}</p>
+                    <p>{{ car['description'] }}</p>
+                    
+                    <div class="car-actions">
+                        <a href="{{ url_for('purchase', car_id=car['id']) }}" class="btn">Purchase</a>
+                        <a href="{{ url_for('edit_car', car_id=car['id']) }}" class="btn">Edit</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No cars available matching your criteria.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

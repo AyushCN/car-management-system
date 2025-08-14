@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Purchase Car{% endblock %}
+
+{% block content %}
+    <h2>Purchase Car</h2>
+    
+    <div class="car-info">
+        <h3>{{ car['make'] }} {{ car['model'] }} ({{ car['year'] }})</h3>
+        <p><strong>Price:</strong> ${{ "{:,.2f}".format(car['price']) }}</p>
+        <p><strong>Mileage:</strong> {{ "{:,}".format(car['mileage']) }} miles</p>
+    </div>
+    
+    <form method="post" class="purchase-form">
+        <div class="form-group">
+            <label for="buyer_name">Your Name:</label>
+            <input type="text" id="buyer_name" name="buyer_name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="buyer_email">Email:</label>
+            <input type="email" id="buyer_email" name="buyer_email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="purchase_price">Purchase Price ($):</label>
+            <input type="number" id="purchase_price" name="purchase_price" 
+                   min="0" step="0.01" value="{{ car['price'] }}" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn">Complete Purchase</button>
+            <a href="{{ url_for('cars') }}" class="btn">Cancel</a>
+        </div>
+    </form>
+{% endblock %}
